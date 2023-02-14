@@ -5,6 +5,8 @@ import os
 # TODO:
 # * Encode/Decode or Encryption/Decryption of passwords
 # * Cleaner "steam_command"
+# * Kill Steam process
+# * Use of functions
 
 if not os.path.exists('accounts.sacpy'):
     print("[ERROR]: The 'accounts.sacpy' file does not exist.")
