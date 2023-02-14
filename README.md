@@ -2,7 +2,7 @@
 
 Simple Python based Steam account switcher for Linux
 
-# Setup
+# Setup:
 
 ## Requirements
 
@@ -21,7 +21,7 @@ Simple Python based Steam account switcher for Linux
   ...
   ```
 
-# Usage
+# Usage:
 
 To log in to an account you have added:
 
