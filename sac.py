@@ -1,4 +1,5 @@
 import subprocess
+import signal
 import time
 import sys
 import os
@@ -8,6 +9,7 @@ import os
 # * Cleaner "steam_command"
 # * Kill Steam process
 # * Use of functions
+# * Check if Steam is running
 
 if not os.path.exists('accounts.sacpy'):
     print("[ERROR]: The 'accounts.sacpy' file does not exist.")
@@ -33,11 +35,22 @@ with open('accounts.sacpy', 'r') as f:
         print(f"[ERROR]: No matching account found in accounts.sacpy for the username: '{username}'")
         sys.exit(1)
 
-if(os.system("ps -e | grep steam")):
-    os.system("notify-send \"Killing Steam\"")
-    os.system("killall -q steam")
-    time.sleep(8)
+proc = subprocess.Popen(["pgrep", "steam"], stdout=subprocess.PIPE)
 
+# Kill process.
+for pid in proc.stdout:
+    os.system("notify-send \"Killing Steam\"")
+    os.kill(int(pid), signal.SIGTERM)
+    # Check if the process that we killed is alive.
+    try:
+       os.kill(int(pid), 0)
+       raise Exception("""wasn't able to kill the process
+                          HINT:use signal.SIGKILL or signal.SIGABORT""")
+    except OSError as ex:
+       continue
+
+# Wait for Steam to terminate !!
+time.sleep(8)
 
 # Launch steam with login parameters and the matched arguments
 steam_command = ("steam " + "-login " + arg1 + " " +  arg2 + " -console " + " & disown")
