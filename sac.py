@@ -11,6 +11,11 @@ import os
 # * Use of functions
 # * Check if Steam is running
 
+# Check if Steam is running, if it's running, kill it and wait for it to fully terminate
+def KillSteam:
+    print("NYI")
+
+
 if not os.path.exists('accounts.sacpy'):
     print("[ERROR]: The 'accounts.sacpy' file does not exist.")
     print("Create accounts.sacpy in this directory, containing account information like so:")
