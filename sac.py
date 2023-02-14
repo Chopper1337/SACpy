@@ -1,4 +1,5 @@
 import subprocess
+import time
 import sys
 import os
 
@@ -31,6 +32,9 @@ with open('accounts.sacpy', 'r') as f:
     else:
         print(f"[ERROR]: No matching account found in accounts.sacpy for the username: '{username}'")
         sys.exit(1)
+
+os.system("killall -q steam")
+time.sleep(8)
 
 # Launch steam with login parameters and the matched arguments
 steam_command = ("steam " + "-login " + arg1 + " " +  arg2 + " -console " + " & disown")
