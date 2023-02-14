@@ -33,8 +33,11 @@ with open('accounts.sacpy', 'r') as f:
         print(f"[ERROR]: No matching account found in accounts.sacpy for the username: '{username}'")
         sys.exit(1)
 
-os.system("killall -q steam")
-time.sleep(8)
+if(os.system("ps -e | grep steam")):
+    os.system("notify-send \"Killing Steam\"")
+    os.system("killall -q steam")
+    time.sleep(8)
+
 
 # Launch steam with login parameters and the matched arguments
 steam_command = ("steam " + "-login " + arg1 + " " +  arg2 + " -console " + " & disown")
