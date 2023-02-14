@@ -1,6 +1,6 @@
 # SACpy
 
-Simple Python based Steam account switcher
+Simple Python based Steam account switcher for Linux
 
 # Setup
 
@@ -30,3 +30,9 @@ To log in to an account you have added:
 To kill Steam
 
 * Run `python sac.py kill`
+
+# TODO:
+
+* Windows support
+* 2FA support (automatic copying of 2FA code to clipboard)
+* GUI
