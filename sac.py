@@ -12,7 +12,7 @@ import os
 # * Check if Steam is running
 
 # Check if Steam is running, if it's running, kill it and wait for it to fully terminate
-def KillSteam:
+def KillSteam():
     proc = subprocess.Popen(["pgrep", "steam"], stdout=subprocess.PIPE)
     for pid in proc.stdout:
         os.system("notify-send \"Killing Steam\"")
