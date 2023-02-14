@@ -36,3 +36,4 @@ To kill Steam
 * Windows support
 * 2FA support (automatic copying of 2FA code to clipboard)
 * GUI
+* Installable package (`pyinstaller` ?)
