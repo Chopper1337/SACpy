@@ -12,7 +12,7 @@ Simple Python based Steam account switcher for Linux
 
 ## Accounts
 
-* Create "accounts.sacpy" containing your accounts in the format of:
+* Create "accounts.sacpy" in the script's directory containing your accounts in the format of:
   
   ```
   username:password
@@ -25,15 +25,21 @@ Simple Python based Steam account switcher for Linux
 
 To log in to an account you have added:
 
-* Run `python sac.py username`
+* Run `sac.py username`
+
+To list the accounts in your accounts file
+
+* Run `sac.py list`
 
 To kill Steam
 
-* Run `python sac.py kill`
+* Run `sac.py kill`
 
 # TODO:
 
 * Windows support
+  * Add OS check (platform.system())
+  * Account for different Steam path
 * 2FA support (automatic copying of 2FA code to clipboard)
 * GUI
 * Installable package (`pyinstaller` [?](https://pyinstaller.org))
