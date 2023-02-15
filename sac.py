@@ -9,7 +9,6 @@ import os
 
 # TODO:
 # * Encode/Decode or Encryption/Decryption of passwords
-# * Cleaner "steam_command"
 
 # Check if Steam is running, returns boolean
 def steam_running():
@@ -19,6 +18,17 @@ def steam_running():
             return True
     print("[INFO]: Steam not running")
     return False
+
+# Launch Steam with provided username and password
+def launch_steam(username, password):
+    # Launch steam with login parameters and the matched arguments
+    steam_command = f"steam -login {username} {password} -console & disown"
+
+    # Kill process.
+    kill_if_running()
+
+    print("[INFO]: Starting Steam")
+    os.system(steam_command)
 
 # Kills the Steam process
 def kill_steam():
@@ -38,6 +48,15 @@ def kill_steam():
 def kill_if_running():
     if(steam_running()):
         kill_steam()
+
+def list_accounts():
+    with open('accounts.sacpy', 'r') as f:
+        for line in f:
+            line = line.strip()
+            args = line.split(':')
+            if len(args) == 2:
+                print(args[0])
+    sys.exit(1)
 
 # Check for username or command (kill) being provided
 if len(sys.argv) < 2:
@@ -62,13 +81,7 @@ if not os.path.exists('accounts.sacpy'):
 
 # Lists all the accounts in the file (does not show passwords)
 if username == "list":
-    with open('accounts.sacpy', 'r') as f:
-        for line in f:
-            line = line.strip()
-            args = line.split(':')
-            if len(args) == 2:
-                print(args[0])
-    sys.exit(1)
+    list_accounts()
 
 # Open accounts file, read each line, split each line by ":" and check if the username (arg[0]) matches our provided username
 # If it matches, arg[1] is our password. Else print error saying account not found.
@@ -83,11 +96,4 @@ with open('accounts.sacpy', 'r') as f:
         print(f"[ERROR]: No matching account found in accounts.sacpy for the username: '{username}'")
         sys.exit(1)
 
-# Launch steam with login parameters and the matched arguments
-steam_command = ("steam " + "-login " + username + " " + password + " -console " + " & disown")
-
-# Kill process.
-kill_if_running()
-
-print("[INFO]: Starting Steam")
-os.system(steam_command)
+launch_steam(username,password)
