@@ -10,8 +10,8 @@ import os
 # TODO:
 # * Encode/Decode or Encryption/Decryption of passwords
 # * Cleaner "steam_command"
-# * Consistent function and variable naming
 
+# Check if Steam is running, returns boolean
 def steam_running():
     for proc in psutil.process_iter(['name']):
         if proc.info['name'] == "steam":
@@ -21,7 +21,7 @@ def steam_running():
     return False
 
 # Kills the Steam process
-def KillSteam():
+def kill_steam():
     print("[INFO]: Killing Steam")
     proc = subprocess.Popen(["pgrep", "steam"], stdout=subprocess.PIPE)
     for pid in proc.stdout:
@@ -34,9 +34,10 @@ def KillSteam():
     # Wait for Steam to terminate !!
     time.sleep(8)
 
+# Kill Steam only if it's running
 def kill_if_running():
     if(steam_running()):
-        KillSteam()
+        kill_steam()
 
 # Check for username or command (kill) being provided
 if len(sys.argv) < 2:
@@ -59,6 +60,7 @@ if not os.path.exists('accounts.sacpy'):
     print("username:password\nusername:password\n...")
     sys.exit(1)
 
+# Lists all the accounts in the file (does not show passwords)
 if username == "list":
     with open('accounts.sacpy', 'r') as f:
         for line in f:
@@ -68,8 +70,8 @@ if username == "list":
                 print(args[0])
     sys.exit(1)
 
-# Open accounts file, read each line, split it by ":" and check if the username matches our provided username
-# If it matches, let the second arg be our password. Else print error saying account not found.
+# Open accounts file, read each line, split each line by ":" and check if the username (arg[0]) matches our provided username
+# If it matches, arg[1] is our password. Else print error saying account not found.
 with open('accounts.sacpy', 'r') as f:
     for line in f:
         line = line.strip()
