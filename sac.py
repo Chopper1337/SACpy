@@ -10,9 +10,7 @@ import os
 # TODO:
 # * Encode/Decode or Encryption/Decryption of passwords
 # * Cleaner "steam_command"
-# * Kill Steam process
-# * Use of functions
-# * Check if Steam is running
+# * Consistent function and variable naming
 
 def steam_running():
     for proc in psutil.process_iter(['name']):
