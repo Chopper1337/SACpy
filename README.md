@@ -35,6 +35,10 @@ To kill Steam
 
 * Run `sac.py kill`
 
+# Warning
+
+This script runs Steam using the `-login` argument, meaning your username and password will be visible in your process list!
+
 # TODO:
 
 * Windows support
