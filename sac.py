@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import subprocess
 import psutil
 import signal
@@ -34,6 +36,9 @@ def KillSteam():
     # Wait for Steam to terminate !!
     time.sleep(8)
 
+def kill_if_running():
+    if(steam_running()):
+        KillSteam()
 
 # Check for username or command (kill) being provided
 if len(sys.argv) < 2:
@@ -46,7 +51,7 @@ username = sys.argv[1]
 
 # If username is "kill", kill Steam (not like anyone has the username of "kill" right???)
 if username == "kill":
-    KillSteam()
+    kill_if_running()
     sys.exit(1)
 
 # Check for existence of "accounts.sacpy"
@@ -82,8 +87,7 @@ with open('accounts.sacpy', 'r') as f:
 steam_command = ("steam " + "-login " + username + " " + password + " -console " + " & disown")
 
 # Kill process.
-if(steam_running()):
-    KillSteam()
+kill_if_running()
 
 print("[INFO]: Starting Steam")
 os.system(steam_command)
