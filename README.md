@@ -10,6 +10,8 @@ Simple Python based Steam account switcher for Linux
 
 * Steam
 
+* fzf
+
 ## Accounts
 
 * Create "accounts.sacpy" in the script's directory containing your accounts in the format of:
@@ -25,7 +27,7 @@ Simple Python based Steam account switcher for Linux
 
 To log in to an account you have added:
 
-* Run `sac.py username`
+* Run `sac.py`
 
 To list the accounts in your accounts file
 

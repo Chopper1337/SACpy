@@ -6,6 +6,7 @@ import signal
 import time
 import sys
 import os
+from pyfzf import FzfPrompt
 
 # TODO:
 # * Encode/Decode or Encryption/Decryption of passwords
@@ -39,17 +40,11 @@ def kill_if_running():
     if(steam_running()):
         kill_steam()
 
-# Check for username or command (kill) being provided
-if len(sys.argv) < 2:
-    print("[ERROR]: Provide a username or command!")
-    print("Example: sac.py username\n\t sac.py kill")
-    sys.exit(1)
-
 # Assign provided username to a variable
-username = sys.argv[1]
+command = sys.argv[1] if len(sys.argv) > 1 else None
 
 # If username is "kill", kill Steam (not like anyone has the username of "kill" right???)
-if username == "kill":
+if command == "kill":
     kill_if_running()
     sys.exit(1)
 
@@ -61,7 +56,7 @@ if not os.path.exists('accounts.sacpy'):
     sys.exit(1)
 
 # Lists all the accounts in the file (does not show passwords)
-if username == "list":
+if command == "list":
     with open('accounts.sacpy', 'r') as f:
         for line in f:
             line = line.strip()
@@ -70,21 +65,32 @@ if username == "list":
                 print(args[0])
     sys.exit(1)
 
-# Open accounts file, read each line, split each line by ":" and check if the username (arg[0]) matches our provided username
-# If it matches, arg[1] is our password. Else print error saying account not found.
+# Open the file and read the account data. Then prompt the user to select an account.
 with open('accounts.sacpy', 'r') as f:
-    for line in f:
+    accounts = {}
+    lines = f.read().splitlines()
+    if len(lines) == 0:
+        print("[ERROR]: No accounts found in accounts.sacpy")
+        sys.exit(1)
+    for line in lines:
         line = line.strip()
         args = line.split(':')
-        if len(args) == 2 and args[0] == username:
-            password = args[1]
-            break
-    else:
-        print(f"[ERROR]: No matching account found in accounts.sacpy for the username: '{username}'")
+        if len(args) == 2:
+            accounts[args[0]] = args[1]
+        else:
+            print("[ERROR]: Invalid account format in accounts.sacpy")
+            sys.exit(1)
+    usernames = list(accounts.keys())
+    fzf = FzfPrompt()
+    selection = fzf.prompt(usernames, '--header="Select an account"')
+    if selection == None:
         sys.exit(1)
+    username = selection[0]
+    password = accounts[username] 
 
 # Launch steam with login parameters and the matched arguments
-steam_command = ("steam " + "-login " + username + " " + password + " -console " + " & disown")
+steam_command = f"steam -login {username} {password} -console & disown"
+print(steam_command)
 
 # Kill process.
 kill_if_running()
