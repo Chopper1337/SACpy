@@ -8,15 +8,17 @@ import sys
 import os
 
 # TODO:
-# * Encode/Decode or Encryption/Decryption of passwords
+# * Optional encryption of passwords (third bool in account file, if true, it's encrypted)
 
 # Check if Steam is running, returns boolean
 def steam_running():
     for proc in psutil.process_iter(['name']):
         if proc.info['name'] == "steam":
             print("[INFO]: Steam running")
+            os.system(f"notify-send \"Steam running\"")
             return True
     print("[INFO]: Steam not running")
+    os.system(f"notify-send \"Steam not running\"")
     return False
 
 # Launch Steam with provided username and password
@@ -27,7 +29,8 @@ def launch_steam(username, password):
     # Kill process.
     kill_if_running()
 
-    print("[INFO]: Starting Steam")
+    print(f"[INFO]: Starting Steam account {username}")
+    os.system(f"notify-send \"Starting Steam account {username}\"")
     os.system(steam_command)
 
 # Kills the Steam process
