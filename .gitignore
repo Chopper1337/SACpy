@@ -8,6 +8,7 @@ __pycache__/
 
 # Accounts file
 *.sacpy
+*.sacpy.des3
 
 # Distribution / packaging
 .Python

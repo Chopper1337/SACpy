@@ -10,9 +10,11 @@ Simple Python based Steam account switcher for Linux
 
 * Steam
 
+* OpenSSL
+
 ## Accounts
 
-* Create "accounts.sacpy" in the script's directory containing your accounts in the format of:
+1. Create "accounts.sacpy" in the script's directory containing your accounts in the format of:
   
   ```
   username:password
@@ -21,15 +23,23 @@ Simple Python based Steam account switcher for Linux
   ...
   ```
 
+2. Run `sac.py encrypt accountfilepassword` where "accountfilepassword" is your desired password for the file.
+
+Now you should have an encrypted file named "accounts.sacpy.des3" which holds your account credentials.
+
 # Usage:
 
 To log in to an account you have added:
 
-* Run `sac.py username`
+* Run `sac.py username accountfilepassword` where "accountfilepassword" is your desired password for the file.
 
-To list the accounts in your accounts file
+To list the accounts in your accounts file:
 
-* Run `sac.py list`
+* Run `sac.py list accountfilepassword` where "accountfilepassword" is your desired password for the file.
+
+To decrypt your accounts file (To modify it in plain text):
+
+* Run `sac.py decrypt accountfilepassword` where "accountfilepassword" is your desired password for the file.
 
 To kill Steam
 
@@ -39,8 +49,6 @@ To kill Steam
 
 * This script runs Steam using the `-login` argument, meaning your username and password will be visible in your process list (for example, in `htop`).
 
-* The `accounts.sacpy` file will hold your account credentials without encryption or even encoding. 
-
 # TODO:
 
 * Windows support
@@ -49,4 +57,3 @@ To kill Steam
 * 2FA support (automatic copying of 2FA code to clipboard)
 * GUI
 * Installable package (`pyinstaller` [?](https://pyinstaller.org))
-* Encryption/Decryption of passwords
