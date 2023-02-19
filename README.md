@@ -29,6 +29,8 @@ Now you should have an encrypted file named "accounts.sacpy.des3" which holds yo
 
 # Usage:
 
+Once you have added your account(s) and encrypted the file:
+
 To log in to an account you have added:
 
 * Run `sac.py username accountfilepassword` where "accountfilepassword" is your desired password for the file.
@@ -46,6 +48,8 @@ To kill Steam
 * Run `sac.py kill`
 
 # Warnings
+
+* The encryption method currently in use isn't perfect, treat even the encrypted file as you would the decrypted one.
 
 * This script runs Steam using the `-login` argument, meaning your username and password will be visible in your process list (for example, in `htop`).
 
