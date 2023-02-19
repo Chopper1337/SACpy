@@ -8,7 +8,7 @@ import sys
 import os
 
 # TODO:
-# * Optional encryption of passwords (third bool in account file, if true, it's encrypted)
+# * Replace the `time.sleep(8)` with a proper check for Steam being terminated
 
 # Check for existence of the accounts file, encrypted or not
 def accounts_file_exists(encrypted: bool):
