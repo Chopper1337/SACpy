@@ -35,9 +35,11 @@ To kill Steam
 
 * Run `sac.py kill`
 
-# Warning
+# Warnings
 
-This script runs Steam using the `-login` argument, meaning your username and password will be visible in your process list!
+* This script runs Steam using the `-login` argument, meaning your username and password will be visible in your process list (for example, in `htop`).
+
+* The `accounts.sacpy` file will hold your account credentials without encryption or even encoding. 
 
 # TODO:
 
@@ -47,3 +49,4 @@ This script runs Steam using the `-login` argument, meaning your username and pa
 * 2FA support (automatic copying of 2FA code to clipboard)
 * GUI
 * Installable package (`pyinstaller` [?](https://pyinstaller.org))
+* Encryption/Decryption of passwords
