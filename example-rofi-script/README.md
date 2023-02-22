@@ -19,3 +19,17 @@ This is an example of using SACpy along with Rofi
     * Search for the term "EDIT_ME" and you'll find the things to modify
 
 5. Run the `sac` script
+
+If you dislike the colours in use for the Rofi menu, modify the `theme.rasi` file
+
+If you dislike the menu size or position, modify the `sac.rasi` and `sacpass.rasi` files.
+
+  `sac.rasi` is used by the main account selecting menu
+
+  `sacpass.rasi` is used by the password input "menu"
+
+## To note
+
+This is all hacked together but it *does* work.
+
+Until I create (or someone else creates) a GUI for SACpy, this is my solution.
