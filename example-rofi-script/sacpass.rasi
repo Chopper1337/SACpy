@@ -9,7 +9,7 @@ configuration {
 	sidebar-mode: 					false;
 }
 
-@import "./purple_dark_transparent_colours.rasi"
+@import "./theme.rasi"
 
 window {
     background-color:               @background;
