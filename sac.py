@@ -68,6 +68,12 @@ def kill_if_running():
     if(steam_running()):
         kill_steam()
 
+# Escape all special characters in a string
+def escape_string(s: str):
+    for c in ['\\', '"', '$', '`', '!', '(', ')', '[', ']', '{', '}', '|', ';', "'", ' ', '>', '<', '&', '*', '?', '~', '^', '#', '%', '@', ' ']:
+        s = s.replace(c, f"\\{c}")
+    return s
+
 # Encrypt the accounts file with openssl des3
 def encrypt_accounts_file(pw: str):
     os.system(f"openssl des3 -k {pw} < accounts.sacpy > accounts.sacpy.des3")
@@ -135,7 +141,6 @@ decrypt_accounts_file(sys.argv[2])
 if username == "list":
     list_accounts()
 
-
 # Open accounts file, read each line, split each line by ":" and check if the username (arg[0]) matches our provided username
 # If it matches, arg[1] is our password. Else print error saying account not found.
 with open('accounts.sacpy', 'r') as f:
@@ -150,4 +155,4 @@ with open('accounts.sacpy', 'r') as f:
         sys.exit(1)
 
 clean_up()
-launch_steam(username,password)
+launch_steam(username,escape_string(password))
