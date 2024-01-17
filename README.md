@@ -1,6 +1,8 @@
 # SACpy
 
-Simple Python based Steam account switcher for Linux
+Simple Python based Steam account switcher for Linux.
+
+Created just before Valve added an account switcher to Steam (you should probably just use that) :)))
 
 # Setup:
 

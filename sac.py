@@ -77,11 +77,13 @@ def escape_string(s: str):
 # Encrypt the accounts file with openssl des3
 def encrypt_accounts_file(pw: str):
     os.system(f"openssl des3 -k {pw} < accounts.sacpy > accounts.sacpy.des3")
+    os.system(f"notify-send \"Accounts file encrypted\"")
 
 # Decrypt the accounts file with openssl des3
 def decrypt_accounts_file(pw: str):
     if os.path.exists('accounts.sacpy.des3'):
         os.system(f"openssl des3 -d -k {pw} < accounts.sacpy.des3 > accounts.sacpy")
+        os.system(f"notify-send \"Accounts file decrypted\"")
 
 def clean_up():
     os.remove("accounts.sacpy")
